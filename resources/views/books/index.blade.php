@@ -9,9 +9,12 @@
     <link href="{{ asset('style.css') }}" rel = "stylesheet">
 </head>
 <body>
+        <div class="add_title_properties">
+            <div class="text-success"><h3>{{ session('success') }}</h3></div>
+        </div>
     <div class="wrapper_table_books">
         <div class="add_title_properties">
-            <a href="">Add new book</a>
+            <a href="{{ route('books.formcreate') }}">Add new book</a>
             <hr>
         <div>
         <div class="table_properties">
@@ -39,10 +42,10 @@
                         {{ $row->isbn }}
                     </td>
                     <td>  
-                        <a href="">Edit</a>
+                        <a href="{{ url('books.formedit/'.$row->id) }}">Edit</a>
                     </td>
                     <td>
-                        <a href="">Delete</a>
+                        <a href="{{ url('books.delete/'.$row->id) }}">Delete</a>
                     </td>
                 </tr>
                 @endforeach

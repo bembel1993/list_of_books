@@ -18,8 +18,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('books.formedit/{id}', [CrudController::class, 'showformedit']);
+Route::put('updateindb/{id}', [CrudController::class, 'update_bk']);
+Route::get('books.delete/{id}', [CrudController::class, 'delete_bk']);
+
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    Route::get('/', 'CrudController@read_books')->name('books.index');
+    Route::get('/', 'CrudController@read_bk')->name('books.index');
+    Route::get('/formcreate', 'CrudController@showformcreate')->name('books.formcreate');
+    Route::post('/addindb', 'CrudController@create_bk')->name('books.create');
 });
 
 require __DIR__.'/auth.php';
