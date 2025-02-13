@@ -36,3 +36,8 @@
 .lanth_form-group { 
     width: 100%; 
   }
+
+.search_properties {
+    width: 100%;
+    margin-left: 25%;
+}

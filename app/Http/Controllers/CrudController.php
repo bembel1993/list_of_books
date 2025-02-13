@@ -27,7 +27,7 @@ class CrudController extends Controller
             'isbn' => 'required',
         ]);
         Book::create($validatedData);
-        return redirect()->route('books.index')->with('success', 'Books added successfully');
+        return redirect()->route('books.index')->with('success', 'Book added successfully');
     }
 
     public function read_bk()
@@ -44,13 +44,13 @@ class CrudController extends Controller
         $book->published_year = $request->input('published_year');
         $book->isbn = $request->input('isbn');
         $book->update();
-        return redirect()->route('books.index')->with('success', 'Books updated successfully');
+        return redirect()->route('books.index')->with('success', 'Book updated successfully');
     }
 
     public function delete_bk($id)
     {
         $book = Book::find($id);
         $book->delete();
-        return redirect()->route('books.index')->with('success', 'Books deleted successfully');
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully');
     }
 }
