@@ -42,8 +42,22 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+            <label for="books_sort">Sort books:</label>
+                <div class="col-md-2">
+                    <form action="" method="">
+                        <select class="form-select" name="books_sort" id="books_sort">
+                            <option id="by_title_top" onclick="return title_top()">by title ↑</option>
+                            <option id="by_title_bottom">by title ↓</option>
+                            <option id="by_year_top">by year ↑</option>
+                            <option id="by_year_bottom">by year ↓</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
         <hr>
-
         <div class="table_properties">
             <table class="table">
                 <thead>
@@ -201,6 +215,65 @@
             if (confirm("Are you really want to delete this book?") == false){
                 return false;
             } 
+        }
+    </script>
+    <script>
+        function title_top()
+        {
+        $('#by_title_top').on('keyup', function(){
+            sortTitleTop();
+            });
+            sortTitleTop();
+            function sortTitleTop()
+            {
+                var keyword_title_top = $('#by_title_top').val();
+                $.post('{{ route("bytitletop.sort") }}',
+                {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    keyword_title_top:keyword_title_top
+                },
+                function(data){
+                    sort_by_title_top(data);
+                    console.log(data);
+                });
+            }
+
+            function sort_by_title_top(res)
+            {
+                let htmlView = '';
+                let title = '';
+                let author = ''; 
+                let published_year = ''; 
+                let isbn = '';
+
+                if(res.authors.length <= 0){
+                    htmlView+= `
+                    <tr>
+                        <td colspan="6">No data.</td>
+                    </tr>`;
+                }
+
+                for(let i = 0; i < res.authors.length; i++)
+                {
+                    $("#authorId").val(res.authors[i].title);
+
+                    htmlView += `
+                            <tr>
+                                <td>`+res.authors[i].title+`</td>
+                                <td>`+res.authors[i].author+`</td>
+                                <td>`+res.authors[i].published_year+`</td>
+                                <td>`+res.authors[i].isbn+`</td>
+                                <td>  
+                                    <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                </td>
+                            </tr>`;
+                            
+                }
+                $('tbody').html(htmlView);
+            }
         }
     </script>
 </body>

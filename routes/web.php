@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SortController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function () {
@@ -26,6 +27,8 @@ Route::get('books.delete/{id}', [CrudController::class, 'delete_bk']);
 
 Route::get('/books',[CrudController::class,'read_bk']);
 Route::post('/books/search',[SearchController::class,'show_auth'])->name('authors.search');
+
+Route::post('/books/sortbytitletop',[SortController::class,'sorttitle_top'])->name('bytitletop.sort');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/', 'CrudController@read_bk')->name('books.index');

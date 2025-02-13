@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function show_auth(Request $request)
     {
-        $authors = Book::all();
+        $authors = Book::orderBy('id', 'desc')->get();
 
         if($request->keyword_auth)
         {
