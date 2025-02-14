@@ -28,7 +28,10 @@ Route::get('books.delete/{id}', [CrudController::class, 'delete_bk']);
 Route::get('/books',[CrudController::class,'read_bk']);
 Route::post('/books/search',[SearchController::class,'show_auth'])->name('authors.search');
 
+Route::post('/books/sortbytitlebottom',[SortController::class,'sorttitle_bottom'])->name('bytitlebottom.sort');
 Route::post('/books/sortbytitletop',[SortController::class,'sorttitle_top'])->name('bytitletop.sort');
+Route::post('/books/sortbyyeartop',[SortController::class,'sortyear_top'])->name('byyeartop.sort');
+Route::post('/books/sortbyyearbottom',[SortController::class,'sortyear_bottom'])->name('byyearbottom.sort');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/', 'CrudController@read_bk')->name('books.index');
