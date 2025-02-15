@@ -34,7 +34,7 @@ Route::post('/books/sortbyyeartop',[SortController::class,'sortyear_top'])->name
 Route::post('/books/sortbyyearbottom',[SortController::class,'sortyear_bottom'])->name('byyearbottom.sort');
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    // Route::get('/', 'CrudController@read_bk')->name('books.index');
+    Route::get('/', 'CrudController@read_bk')->name('books.index');
     Route::get('/formcreate', 'CrudController@showformcreate')->name('books.formcreate');
     Route::post('/addindb', 'CrudController@create_bk')->name('books.create');
 });

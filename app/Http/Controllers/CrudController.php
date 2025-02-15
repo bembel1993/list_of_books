@@ -32,7 +32,7 @@ class CrudController extends Controller
 
     public function read_bk()
     {
-        $books = Book::orderBy('id', 'desc')->get();;
+        $books = Book::orderBy('id', 'desc')->paginate(5);
         return view('books.index', compact('books'));
     }
 

@@ -67,6 +67,7 @@
                     </tr>
                 </thead>
                 <tbody id="books-tbody">
+                @if(count($books)>0)    
                     @foreach ($books as $row)
                     <tr>
                         <td id="title">
@@ -89,10 +90,52 @@
                         </td>
                     </tr>
                     @endforeach
+                    @else
+                    <p>No Posts Found</p>
+                @endif
                 </tbody>
             </table>
+            
         </div>
-    </div>
+    </div> 
+
+    <nav aria-label="Page navigation example"> 
+        <ul class="pagination justify-content-center"> 
+            {{-- Previous Page Link --}} 
+            @if ($books->onFirstPage()) 
+            <li class="page-item disabled"> 
+                <span class="page-link">&laquo;</span> 
+            </li> 
+            @else 
+            <li class="page-item"> 
+                <a class="page-link" href="{{ $books->previousPageUrl() }}" aria-label="Previous"> 
+                <span aria-hidden="true">&laquo;</span> 
+                </a> 
+            </li> 
+            @endif 
+        
+            {{-- Numbered Page Links --}} 
+            @foreach ($books->getUrlRange(1, $books->lastPage()) as $page => $url) 
+            <li class="page-item {{ $books->currentPage() == $page ? 'active' : '' }}"> 
+                <a class="page-link" href="{{ $url }}">{{ $page }}</a> 
+            </li> 
+            @endforeach 
+        
+            {{-- Next Page Link --}} 
+            @if ($books->hasMorePages()) 
+            <li class="page-item"> 
+                <a class="page-link" href="{{ $books->nextPageUrl() }}" aria-label="Next"> 
+                <span aria-hidden="true">&raquo;</span> 
+                </a> 
+            </li> 
+            @else 
+            <li class="page-item disabled"> 
+                <span class="page-link">&raquo;</span> 
+            </li> 
+            @endif 
+        </ul> 
+    </nav>  
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script>
@@ -122,28 +165,28 @@
             let published_year = ''; 
             let isbn = '';
 
-            if(res.authors.length <= 0){
+            if(res.books.length <= 0){
                 htmlView+= `
                 <tr>
                     <td colspan="6">No data.</td>
                 </tr>`;
             }
 
-            for(let i = 0; i < res.authors.length; i++)
+            for(let i = 0; i < res.books.length; i++)
             {
-                $("#authorId").val(res.authors[i].title);
+                $("#authorId").val(res.books[i].title);
 
                 htmlView += `
                         <tr>
-                            <td>`+res.authors[i].title+`</td>
-                            <td>`+res.authors[i].author+`</td>
-                            <td>`+res.authors[i].published_year+`</td>
-                            <td>`+res.authors[i].isbn+`</td>
+                            <td>`+res.books[i].title+`</td>
+                            <td>`+res.books[i].author+`</td>
+                            <td>`+res.books[i].published_year+`</td>
+                            <td>`+res.books[i].isbn+`</td>
                             <td>  
-                                <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                             </td>
                             <td>
-                                <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                             </td>
                         </tr>`;
                         
@@ -178,28 +221,28 @@
             let published_year = ''; 
             let isbn = '';
 
-            if(res.authors.length <= 0){
+            if(res.books.length <= 0){
                 htmlView+= `
                 <tr>
                     <td colspan="6">No data.</td>
                 </tr>`;
             }
 
-            for(let i = 0; i < res.authors.length; i++)
+            for(let i = 0; i < res.books.length; i++)
             {
-                $("#authorId").val(res.authors[i].title);
+                $("#authorId").val(res.books[i].title);
 
                 htmlView += `
                         <tr>
-                            <td>`+res.authors[i].title+`</td>
-                            <td>`+res.authors[i].author+`</td>
-                            <td>`+res.authors[i].published_year+`</td>
-                            <td>`+res.authors[i].isbn+`</td>
+                            <td>`+res.books[i].title+`</td>
+                            <td>`+res.books[i].author+`</td>
+                            <td>`+res.books[i].published_year+`</td>
+                            <td>`+res.books[i].isbn+`</td>
                             <td>  
-                                <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                             </td>
                             <td>
-                                <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                             </td>
                         </tr>`;
                         
@@ -246,28 +289,28 @@
                     let published_year = ''; 
                     let isbn = '';
 
-                    if(res.authors.length <= 0){
+                    if(res.books.length <= 0){
                         htmlView+= `
                         <tr>
                             <td colspan="6">No data.</td>
                         </tr>`;
                     }
 
-                    for(let i = 0; i < res.authors.length; i++)
+                    for(let i = 0; i < res.books.length; i++)
                     {
-                        $("#authorId").val(res.authors[i].title);
+                        $("#authorId").val(res.books[i].title);
 
                         htmlView += `
                                 <tr>
-                                    <td>`+res.authors[i].title+`</td>
-                                    <td>`+res.authors[i].author+`</td>
-                                    <td>`+res.authors[i].published_year+`</td>
-                                    <td>`+res.authors[i].isbn+`</td>
+                                    <td>`+res.books[i].title+`</td>
+                                    <td>`+res.books[i].author+`</td>
+                                    <td>`+res.books[i].published_year+`</td>
+                                    <td>`+res.books[i].isbn+`</td>
                                     <td>  
-                                        <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                        <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                        <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                                     </td>
                                 </tr>`;
                                 
@@ -307,28 +350,28 @@
                     let published_year = ''; 
                     let isbn = '';
 
-                    if(res.authors.length <= 0){
+                    if(res.books.length <= 0){
                         htmlView+= `
                         <tr>
                             <td colspan="6">No data.</td>
                         </tr>`;
                     }
 
-                    for(let i = 0; i < res.authors.length; i++)
+                    for(let i = 0; i < res.books.length; i++)
                     {
-                        $("#authorId").val(res.authors[i].title);
+                        $("#authorId").val(res.books[i].title);
 
                         htmlView += `
                                 <tr>
-                                    <td>`+res.authors[i].title+`</td>
-                                    <td>`+res.authors[i].author+`</td>
-                                    <td>`+res.authors[i].published_year+`</td>
-                                    <td>`+res.authors[i].isbn+`</td>
+                                    <td>`+res.books[i].title+`</td>
+                                    <td>`+res.books[i].author+`</td>
+                                    <td>`+res.books[i].published_year+`</td>
+                                    <td>`+res.books[i].isbn+`</td>
                                     <td>  
-                                        <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                        <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                        <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                                     </td>
                                 </tr>`;
                                 
@@ -368,28 +411,28 @@
                     let published_year = ''; 
                     let isbn = '';
 
-                    if(res.authors.length <= 0){
+                    if(res.books.length <= 0){
                         htmlView+= `
                         <tr>
                             <td colspan="6">No data.</td>
                         </tr>`;
                     }
 
-                    for(let i = 0; i < res.authors.length; i++)
+                    for(let i = 0; i < res.books.length; i++)
                     {
-                        $("#authorId").val(res.authors[i].title);
+                        $("#authorId").val(res.books[i].title);
 
                         htmlView += `
                                 <tr>
-                                    <td>`+res.authors[i].title+`</td>
-                                    <td>`+res.authors[i].author+`</td>
-                                    <td>`+res.authors[i].published_year+`</td>
-                                    <td>`+res.authors[i].isbn+`</td>
+                                    <td>`+res.books[i].title+`</td>
+                                    <td>`+res.books[i].author+`</td>
+                                    <td>`+res.books[i].published_year+`</td>
+                                    <td>`+res.books[i].isbn+`</td>
                                     <td>  
-                                        <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                        <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                        <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                                     </td>
                                 </tr>`;
                                 
@@ -429,28 +472,28 @@
                     let published_year = ''; 
                     let isbn = '';
 
-                    if(res.authors.length <= 0){
+                    if(res.books.length <= 0){
                         htmlView+= `
                         <tr>
                             <td colspan="6">No data.</td>
                         </tr>`;
                     }
 
-                    for(let i = 0; i < res.authors.length; i++)
+                    for(let i = 0; i < res.books.length; i++)
                     {
-                        $("#authorId").val(res.authors[i].title);
+                        $("#authorId").val(res.books[i].title);
 
                         htmlView += `
                                 <tr>
-                                    <td>`+res.authors[i].title+`</td>
-                                    <td>`+res.authors[i].author+`</td>
-                                    <td>`+res.authors[i].published_year+`</td>
-                                    <td>`+res.authors[i].isbn+`</td>
+                                    <td>`+res.books[i].title+`</td>
+                                    <td>`+res.books[i].author+`</td>
+                                    <td>`+res.books[i].published_year+`</td>
+                                    <td>`+res.books[i].isbn+`</td>
                                     <td>  
-                                        <a href="{{ url('books.formedit/') }}/${res.authors[i].id}">Edit</a>
+                                        <a href="{{ url('books.formedit/') }}/${res.books[i].id}">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('books.delete/') }}/${res.authors[i].id}" onclick="return deleteBook()">Delete</a>
+                                        <a href="{{ url('books.delete/') }}/${res.books[i].id}" onclick="return deleteBook()">Delete</a>
                                     </td>
                                 </tr>`;
                                 

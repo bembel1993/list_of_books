@@ -9,16 +9,16 @@ class SearchController extends Controller
 {
     public function show_auth(Request $request)
     {
-        $authors = Book::orderBy('id', 'desc')->get();
+        $books = Book::orderBy('id', 'desc')->get();
 
         if($request->keyword_auth)
         {
             if($request->keyword_auth != '')
             {
-                $authors = Book::where('author','LIKE','%'.$request->keyword_auth.'%')->get();
+                $books = Book::where('author','LIKE','%'.$request->keyword_auth.'%')->get();
             } 
             return response()->json([
-                'authors' => $authors
+                'books' => $books
             ]);
         }
 
@@ -26,10 +26,10 @@ class SearchController extends Controller
         {
             if($request->keyword_pubyear != '')
             {
-                $authors = Book::where('published_year','LIKE','%'.$request->keyword_pubyear.'%')->get();
+                $books = Book::where('published_year','LIKE','%'.$request->keyword_pubyear.'%')->get();
             }
             return response()->json([
-                'authors' => $authors
+                'books' => $books
             ]);
         }
     }

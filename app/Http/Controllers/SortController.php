@@ -10,37 +10,37 @@ class SortController extends Controller
 
     public function sorttitle_top(Request $request)
     {
-        $authors = Book::orderBy('title', 'desc')->get();
+        $books = Book::orderBy('title', 'desc')->get();
 
         return response()->json([
-            'authors' => $authors
+            'books' => $books
         ]);
     }
 
     public function sorttitle_bottom(Request $request)
     {
-        $authors = Book::orderBy('title', 'asc')->get();
+        $books = Book::orderBy('title', 'asc')->get();
 
         return response()->json([
-            'authors' => $authors
+            'books' => $books
         ]);
     }
 
     public function sortyear_top(Request $request)
     {
-        $authors = Book::orderBy('published_year', 'desc')->get();
+        $books = Book::orderBy('published_year', 'desc')->get();
 
         return response()->json([
-            'authors' => $authors
+            'books' => $books
         ]);
     }
 
     public function sortyear_bottom(Request $request)
     {
-        $authors = Book::orderBy('published_year', 'asc')->get();
+        $books = Book::orderBy('published_year', 'asc')->get();
 
         return response()->json([
-            'authors' => $authors
+            'books' => $books
         ]);
     }
 }
