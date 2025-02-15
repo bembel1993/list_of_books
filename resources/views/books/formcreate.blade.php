@@ -14,6 +14,15 @@
             <h3>Add new book</h3>
             <hr>
         <div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="table_properties">
             <div class="form_properties">
                 <form action="{{ route('books.create')}}" method="POST">
@@ -32,7 +41,7 @@
                     </div><br>
                     <div class="form-group">
                         <label for="isbn">ISBN</label><br>
-                        <input type="text" class="form-control form-control-lg" id="isbn" name="isbn" placeholder="ISBN" value="ISBN-">
+                        <input type="text" class="form-control form-control-lg" id="isbn" name="isbn" placeholder="ISBN">
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-primary" id="add-btn" name="add-btn">

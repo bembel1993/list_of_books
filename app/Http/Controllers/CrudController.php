@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Validation\Rules\Isbn;
 use App\Models\Book;
 
 class CrudController extends Controller
@@ -18,13 +19,13 @@ class CrudController extends Controller
         return view('books.formcreate');
     }
 
-    public function create_bk(Request $request)
+    public function create_bk(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'published_year' => 'required|numeric',
-            'isbn' => 'required',
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'published_year' => 'required|numeric|min:1000|max:2999',
+            'isbn' => new Isbn(),
         ]);
         Book::create($validatedData);
         return redirect()->route('books.index')->with('success', 'Book added successfully');
