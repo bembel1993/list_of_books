@@ -38,7 +38,7 @@ class SortController extends Controller
     public function sortyear_bottom(Request $request)
     {
         $books = Book::orderBy('published_year', 'asc')->get();
-
+            
         return response()->json([
             'books' => $books
         ]);

@@ -8,6 +8,7 @@ use App\Models\Book;
 
 class CrudController extends Controller
 {
+
     public function showformedit($id)
     {
         $book = Book::find($id);
@@ -30,7 +31,15 @@ class CrudController extends Controller
         Book::create($validatedData);
         return redirect()->route('books.index')->with('success', 'Book added successfully');
     }
-
+/**
+ * @SWG\Get(
+ *     path="/books",
+ *     summary="Get a list of books",
+ *     tags={"Books"},
+ *     @SWG\Response(response=200, description="Successful operation"),
+ *     @SWG\Response(response=400, description="Not correct request")
+ * )
+ */
     public function read_bk()
     {
         $books = Book::orderBy('id', 'desc')->paginate(10);
