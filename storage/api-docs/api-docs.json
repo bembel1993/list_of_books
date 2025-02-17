@@ -5,6 +5,57 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/": {}
-    }
+        "/api/": {},
+        "/addindb/": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Add book in DB",
+                "operationId": "973e1c6446536102365300e9a78292ee",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Some author"
+                                            },
+                                            "published_year": {
+                                                "type": "integer",
+                                                "example": 2025
+                                            },
+                                            "isbn": {
+                                                "type": "string",
+                                                "example": "Some isbn"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Post",
+            "description": "Post"
+        }
+    ]
 }
