@@ -34,7 +34,7 @@ class CrudController extends Controller
             'title' => 'required|string',
             'author' => 'required|string',
             'published_year' => 'required|numeric|min:1000|max:2999',
-            'isbn' => new Isbn(),
+            'isbn' => 'required|string|min:14|max:20', //new Isbn(),
         ]);
         Book::create($validatedData);
         return redirect()->route('books.index')->with('success', 'Book added successfully');

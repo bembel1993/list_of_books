@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "List of books DOC API",
+        "title": "List of books documentation API",
         "version": "1.0.0"
     },
     "paths": {
@@ -9,9 +9,9 @@
         "/addindb/": {
             "post": {
                 "tags": [
-                    "Post"
+                    "CrudController"
                 ],
-                "summary": "Add book in DB",
+                "summary": "Create book",
                 "operationId": "973e1c6446536102365300e9a78292ee",
                 "requestBody": {
                     "content": {
@@ -46,7 +46,576 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/": {
+            "get": {
+                "tags": [
+                    "CrudController"
+                ],
+                "summary": "Read book",
+                "operationId": "766b6f8075c23d95bc8658adb428324c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            },
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Some author"
+                                            },
+                                            "published_year": {
+                                                "type": "integer",
+                                                "example": 2025
+                                            },
+                                            "isbn": {
+                                                "type": "string",
+                                                "example": "Some isbn"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "title": {
+                                                        "type": "string",
+                                                        "example": "Some title"
+                                                    },
+                                                    "author": {
+                                                        "type": "string",
+                                                        "example": "Some author"
+                                                    },
+                                                    "published_year": {
+                                                        "type": "integer",
+                                                        "example": 2025
+                                                    },
+                                                    "isbn": {
+                                                        "type": "string",
+                                                        "example": "Some isbn"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books.delete/{id}/": {
+            "get": {
+                "tags": [
+                    "CrudController"
+                ],
+                "summary": "Delete book",
+                "operationId": "96b8a7c345a4c6cd03b735adce1d21a8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID book",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books.formedit/{id}/": {
+            "get": {
+                "tags": [
+                    "CrudController"
+                ],
+                "summary": "Show form update book",
+                "operationId": "b5385d833048eaa2411b3202db3e0e27",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID book",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/search/": {
+            "post": {
+                "tags": [
+                    "SearchController"
+                ],
+                "summary": "Search book",
+                "operationId": "0860cdae0f6895a2f168e5f3284f5f8d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Some author"
+                                            },
+                                            "published_year": {
+                                                "type": "integer",
+                                                "example": 2025
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/sortbytitlebottom/": {
+            "post": {
+                "tags": [
+                    "SortController"
+                ],
+                "summary": "Sort book by title Z-A",
+                "operationId": "8613f6d0a848c7b444290ac8ddf93777",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/sortbytitletop/": {
+            "post": {
+                "tags": [
+                    "SortController"
+                ],
+                "summary": "Sort book by title A-Z",
+                "operationId": "d149f568cb135add0039688913b5368f",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Some title"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/sortbyyearbottom/": {
+            "post": {
+                "tags": [
+                    "SortController"
+                ],
+                "summary": "Sort book by year 10-1",
+                "operationId": "ec7c7c9820acd31fd3ee35bea7e287ed",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "published_year": {
+                                                "type": "integer",
+                                                "example": 2025
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books/sortbyyeartop/": {
+            "post": {
+                "tags": [
+                    "SortController"
+                ],
+                "summary": "Sort book by year 1-10",
+                "operationId": "e11287ef0ff980435c5e5ca7e9e70691",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "published_year": {
+                                                "type": "integer",
+                                                "example": 2025
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Some title"
+                                                },
+                                                "author": {
+                                                    "type": "string",
+                                                    "example": "Some author"
+                                                },
+                                                "published_year": {
+                                                    "type": "integer",
+                                                    "example": 2025
+                                                },
+                                                "isbn": {
+                                                    "type": "string",
+                                                    "example": "Some isbn"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -54,8 +623,16 @@
     },
     "tags": [
         {
-            "name": "Post",
-            "description": "Post"
+            "name": "CrudController",
+            "description": "CrudController"
+        },
+        {
+            "name": "SearchController",
+            "description": "SearchController"
+        },
+        {
+            "name": "SortController",
+            "description": "SortController"
         }
     ]
 }

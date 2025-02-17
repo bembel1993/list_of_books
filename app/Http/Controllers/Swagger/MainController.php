@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /**
  * @OA\info
  * (
- *      title="List of books DOC API",
+ *      title="List of books documentation API",
  *      version="1.0.0"
  * ),
  * @OA\PathItem
