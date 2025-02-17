@@ -7,6 +7,9 @@ use App\Models\Book;
 
 class SearchController extends Controller
 {
+/**
+* Search books by author and published year
+*/
     public function show_auth(Request $request)
     {
         $books = Book::orderBy('id', 'desc')->get();

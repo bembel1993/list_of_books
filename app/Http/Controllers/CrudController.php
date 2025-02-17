@@ -8,18 +8,26 @@ use App\Models\Book;
 
 class CrudController extends Controller
 {
-
+/**
+* Show form edit
+* @param int $id The ID of the book to edit. 
+* @return 
+*/
     public function showformedit($id)
     {
         $book = Book::find($id);
         return view('books.formedit', compact('book'));
     }
-
+/**
+* Show form create
+*/
     public function showformcreate()
     {
         return view('books.formcreate');
     }
-
+/**
+* Create data API
+*/
     public function create_bk(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
@@ -32,20 +40,16 @@ class CrudController extends Controller
         return redirect()->route('books.index')->with('success', 'Book added successfully');
     }
 /**
- * @SWG\Get(
- *     path="/books",
- *     summary="Get a list of books",
- *     tags={"Books"},
- *     @SWG\Response(response=200, description="Successful operation"),
- *     @SWG\Response(response=400, description="Not correct request")
- * )
- */
+* Read data API
+*/
     public function read_bk()
     {
         $books = Book::orderBy('id', 'desc')->paginate(10);
         return view('books.index', compact('books'));
     }
-
+/**
+* Update data API
+*/
     public function update_bk(Request $request, $id)
     {
         $book = Book::find($id);
@@ -56,7 +60,9 @@ class CrudController extends Controller
         $book->update();
         return redirect()->route('books.index')->with('success', 'Book updated successfully');
     }
-
+/**
+* Delete data API
+*/
     public function delete_bk($id)
     {
         $book = Book::find($id);

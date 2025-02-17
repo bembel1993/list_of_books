@@ -452,11 +452,11 @@
             
             function sortYearBottom()
                 {
-                    var keyword_title_top = $('#by_year_bottom').val();
+                    var keyword_year_bottom = $('#by_year_bottom').val();
                     $.post('{{ route("byyearbottom.sort") }}',
                     {
                         _token: $('meta[name="csrf-token"]').attr('content'),
-                        keyword_title_top:keyword_title_top
+                        keyword_year_bottom:keyword_year_bottom
                     },
                     function(data){
                         books_sort(data);

@@ -7,7 +7,9 @@ use App\Models\Book;
 
 class SortController extends Controller
 {
-
+/**
+* Sort books by title Z-A
+*/
     public function sorttitle_top(Request $request)
     {
         $books = Book::orderBy('title', 'desc')->get();
@@ -16,7 +18,9 @@ class SortController extends Controller
             'books' => $books
         ]);
     }
-
+/**
+* Sort books by title A-Z
+*/
     public function sorttitle_bottom(Request $request)
     {
         $books = Book::orderBy('title', 'asc')->get();
@@ -25,7 +29,9 @@ class SortController extends Controller
             'books' => $books
         ]);
     }
-
+/**
+* Sort books by published year 10-1
+*/
     public function sortyear_top(Request $request)
     {
         $books = Book::orderBy('published_year', 'desc')->get();
@@ -34,7 +40,9 @@ class SortController extends Controller
             'books' => $books
         ]);
     }
-
+/**
+* Sort books by published year 1-10
+*/
     public function sortyear_bottom(Request $request)
     {
         $books = Book::orderBy('published_year', 'asc')->get();
