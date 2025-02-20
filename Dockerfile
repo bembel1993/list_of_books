@@ -1,23 +1,18 @@
-FROM php:8.2-fpm
+FROM php:8.2-fpm-alpine
 
-ARG user
-ARG uid
+WORKDIR /var/www/app
 
-RUN apt update && apt install -y \
-    git \
+RUN apk update && apk add \
     curl \
     libpng-dev \
-    libonig-dev \
-    libxml2-dev
-RUN apt clean && rm -rf /var/lib/apt/lists/*
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    libxml2-dev \
+    zip \
+    unzip
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN docker-php-ext-install pdo pdo_mysql
 
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-WORKDIR /var/www
+USER root
 
-USER $user
+RUN chmod 777 -R /var/www/app

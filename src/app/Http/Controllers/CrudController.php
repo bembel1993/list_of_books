@@ -28,7 +28,7 @@ class CrudController extends Controller
 /**
 * Create data API
 */
-    public function create_bk(Request $request): RedirectResponse
+    public function create_bk(Request $request)
     {
         $validatedData = $request->validate([
             'title' => 'required|string',
