@@ -11,7 +11,7 @@ RUN apk update && apk add \
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+# COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 USER root
 
